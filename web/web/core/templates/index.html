@@ -1,0 +1,54 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+
+    <title>Главная страница</title>
+  </head>
+  <body>
+
+    <div class="container mt-4">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+              {% url 'home' as url_home %}
+            <a class="nav-link {% if url_home == request.path %}active{% endif %}" href="{{url_home}}">Главная</a>
+          </li>
+          <li class="nav-item">
+              {% url 'edit' as url_edit_page %}
+            <a class="nav-link {% if url_edit_page == request.path %}active{% endif %}" href="{{url_edit_page}}">Создание/ред/удал</a>
+          </li>
+        </ul>
+
+        {%block content %}
+
+        <h1 class="mt-4">Главная страница</h1>
+
+        {% for i in list_task %}
+
+        <ul class="list-group mt-4">
+            <li class="list-group-item">
+                <b>{{i.date}}</b>
+                <span class="m-2">{{i.title}}</span>
+                <span>{{i.full_text|truncatechars:"9"}}</span>
+
+                <span class="span_float"><a href="/detail/{{i.id}}">перейти к статье</a></span>
+            </li>
+        </ul>
+
+        {% endfor %}
+        {% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+  </body>
+</html>
+
+

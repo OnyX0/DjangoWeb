@@ -1,0 +1,8 @@
+{% extends 'index.html' %}
+    {%block content %}
+        <h1 class="mt-4">Статья: {{get_task.title}}</h1>
+        <p><a href="/">Вернуться назад</a></p>
+        <p>Дата создания: {{get_task.date}}</p>
+        <p>Название: {{get_task.title}}</p>
+        <p>Текст: {{get_task.full_text}}</p>
+    {% endblock %}
